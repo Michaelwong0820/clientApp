@@ -1,0 +1,70 @@
+.homeCotainer {
+  padding: 0 10px 50px;
+  .homeHeader {
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .headerName {
+      font-size: 18px;
+      color: #333;
+    }
+    .login,.signUp {
+      color: #4cb1b0;
+    }
+  }
+  .search-time {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    height: 44px;
+    font-size: 18px;
+    padding: 0 14px;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    .search-time-right {
+      color: #888;
+    }
+  }
+  .hot {
+    .hotList {
+      width: 100%;
+      display: grid;
+      // grid-column: 2;
+      // grid-row: 2;
+      grid-template-columns:  50% 50%;
+      grid-template-rows: 50% 50% ;
+      .hotItem {
+        width: 100%;
+        padding: 5px;
+        // background: #fff;
+        .item {
+          border-radius: 12px;
+          overflow: hidden;
+          background: #fff;
+          padding-bottom: 10px;
+          .hotImg {
+            width: 100%;
+          }
+          .hotTitle {
+            font-size: 18px;
+            height: 30px;
+            line-height: 30px;
+            padding-left: 10px;
+          }
+          .hotInfo {
+            color: #888;
+            height: 40px;
+            line-height: 40px;
+            padding-left: 10px;
+          }
+          .hotPrice {
+            color: #f33;
+            font-size: 14px;
+            padding-left: 10px;
+          }
+        }
+      }
+    }
+  }
+}
