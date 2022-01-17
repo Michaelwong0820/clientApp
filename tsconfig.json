@@ -13,10 +13,10 @@
     "paths": {
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"],
-      "@/hooks": ["hooks/index"],
-      "@/components": ["components/index"],
-      "@/models": ["models/index"],
-      "@/utils": ["utils/index"],
+      "@/hooks": ["src/hooks/index"],
+      "@/components": ["src/components/index"],
+      "@/models": ["src/models/index"],
+      "@/utils": ["src/utils/index"],
     },
     "allowSyntheticDefaultImports": true
   },

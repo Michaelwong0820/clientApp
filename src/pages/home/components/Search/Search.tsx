@@ -1,18 +1,12 @@
 // @flow
 import * as React from 'react';
-import { Picker, List, Calendar, Button } from 'antd-mobile';
+import { Picker, List, Calendar, Button, Toast } from 'antd-mobile';
 import dayjs from 'dayjs';
-type Props = {};
-
-const city = [
-  { label: '上海', value: '10001' },
-  { label: '北京', value: '10002' },
-  { label: '重庆', value: '10003' },
-  { label: '广东', value: '10004' },
-  { label: '浙江', value: '10005' },
-  { label: '湖南', value: '10006' },
-  { label: '云南', value: '10007' },
-];
+import {history} from 'umi'
+type Props = {
+  citys: Array<{ label: string; value: string }>;
+  citysLoading: boolean;
+};
 
 function Search(props: Props) {
   const [visible, setVisible] = React.useState(false);
@@ -41,38 +35,56 @@ function Search(props: Props) {
     setDateShow(!dateShow);
   };
 
+  // 跳转到搜索页
+  const handleClick = () => {
+    if(times.includes('~')) {
+      history.push({
+        pathname:'/search',
+        query: {
+          city: value,
+          startTime: times.split('~')[0],
+          endTime: times.split('~')[1],
+        }
+      })
+    }else {
+      Toast.fail('请选择时间')
+    }
+  }
+
   return (
     <div className="search">
       {/* 可选城市 */}
       <div className="search-addr">
-        <Picker
-          title={'城市'}
-          data={city}
-          visible={visible}
-          value={value}
-          onChange={(date) => handleChangeCity(date)}
-          cols={1}
-          onVisibleChange={(bool)=>{
-            setVisible(bool);
-          }}
-        >
-          <List.Item
-            onClick={() => {
-              setVisible(true);
+        {!props.citysLoading && (
+          <Picker
+            title={'城市'}
+            data={props.citys}
+            visible={visible}
+            value={value}
+            onChange={(date) => handleChangeCity(date)}
+            cols={1}
+            onVisibleChange={(bool) => {
+              setVisible(bool);
             }}
           >
-            可选城市
-          </List.Item>
-        </Picker>
+            <List.Item
+              onClick={() => {
+                setVisible(true);
+              }}
+            >
+              可选城市
+            </List.Item>
+          </Picker>
+        )}
       </div>
       {/* 可选时间 */}
-      <div className="search-time" onClick={handleDate} >
+      <div className="search-time" onClick={handleDate}>
         <div className="search-time-left">出租时间</div>
         <div className="search-time-right">{times}</div>
       </div>
 
       {/* 搜索按钮 */}
-      <Button size="large" style={{ backgroundColor: '#f00', color: '#fff',marginTop: 10 }}>
+      <Button size="large" style={{ marginTop: 10 }} type="warning" onClick={handleClick}>
         搜索民宿
       </Button>
       {/* 时间挂件 */}
